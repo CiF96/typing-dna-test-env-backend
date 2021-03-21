@@ -29,7 +29,8 @@ class LoginRequest extends FormRequest
             "password" => ['required', "string", "min:6"],
             "typing_pattern" => ['required', "string"],
             "device_type" => ['required', Rule::in(['mobile', 'desktop'])],
-            "pattern_type" => ['required', Rule::in(['0', '1', '2'])]
+            "pattern_type" => ['required', Rule::in(['0', '1', '2'])],
+            "text_id" => ['required', 'string']
         ];
     }
 }

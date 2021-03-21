@@ -16,7 +16,11 @@ use App\Http\Controllers\ApiAuthController;
 */
 
 
+//AUTH ROUTES
 Route::post("login", [ApiAuthController::class, "login"])->name("login");
 Route::post("register", [ApiAuthController::class, "register"])->name("register");
 Route::get("me", [ApiAuthController::class, "me"])->name("me");
+
+//TYPING PATTERN ROUTES
 Route::post("get-typing-pattern-data", [ApiAuthController::class, "getTypingPatternData"])->name("get-typing-pattern-data");
+Route::post("typing-pattern-data", [ApiAuthController::class, "getTypingPatternDataPremium"])->name("typing-pattern-data");

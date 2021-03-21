@@ -1,21 +1,119 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+	<IfModule mod_negotiation.c>
+		Options -MultiViews -Indexes
+	</IfModule>
 
-    RewriteEngine On
+	RewriteEngine On
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+	#strip www from url
+	RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+	RewriteRule ^(.*)$ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [R=301,L]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+	# Handle Authorization Header
+	RewriteCond %{HTTP:Authorization} .
+	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+	# Redirect Trailing Slashes If Not A Folder...
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} (.+)/$
+	RewriteRule ^ %1 [L,R=301]
+
+	# Handle Front Controller...
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.php [L]
+</IfModule>
+
+<IfModule brotli_module>
+	AddOutputFilterByType BROTLI_COMPRESS application/javascript
+	AddOutputFilterByType BROTLI_COMPRESS application/rss+xml
+	AddOutputFilterByType BROTLI_COMPRESS application/vnd.ms-fontobject
+	AddOutputFilterByType BROTLI_COMPRESS application/x-font
+	AddOutputFilterByType BROTLI_COMPRESS application/x-font-opentype
+	AddOutputFilterByType BROTLI_COMPRESS application/x-font-otf
+	AddOutputFilterByType BROTLI_COMPRESS application/x-font-truetype
+	AddOutputFilterByType BROTLI_COMPRESS application/x-font-ttf
+	AddOutputFilterByType BROTLI_COMPRESS application/x-javascript
+	AddOutputFilterByType BROTLI_COMPRESS application/xhtml+xml
+	AddOutputFilterByType BROTLI_COMPRESS application/xml
+	AddOutputFilterByType BROTLI_COMPRESS font/opentype
+	AddOutputFilterByType BROTLI_COMPRESS font/otf
+	AddOutputFilterByType BROTLI_COMPRESS font/ttf
+	AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+	AddOutputFilterByType BROTLI_COMPRESS image/x-icon
+	AddOutputFilterByType BROTLI_COMPRESS text/css
+	AddOutputFilterByType BROTLI_COMPRESS text/html
+	AddOutputFilterByType BROTLI_COMPRESS text/javascript
+	AddOutputFilterByType BROTLI_COMPRESS text/plain
+	AddOutputFilterByType BROTLI_COMPRESS text/xml
+</IfModule>
+
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE application/javascript
+	AddOutputFilterByType DEFLATE application/rss+xml
+	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+	AddOutputFilterByType DEFLATE application/x-font
+	AddOutputFilterByType DEFLATE application/x-font-opentype
+	AddOutputFilterByType DEFLATE application/x-font-otf
+	AddOutputFilterByType DEFLATE application/x-font-truetype
+	AddOutputFilterByType DEFLATE application/x-font-ttf
+	AddOutputFilterByType DEFLATE application/x-javascript
+	AddOutputFilterByType DEFLATE application/xhtml+xml
+	AddOutputFilterByType DEFLATE application/xml
+	AddOutputFilterByType DEFLATE font/opentype
+	AddOutputFilterByType DEFLATE font/otf
+	AddOutputFilterByType DEFLATE font/ttf
+	AddOutputFilterByType DEFLATE image/svg+xml
+	AddOutputFilterByType DEFLATE image/x-icon
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE text/html
+	AddOutputFilterByType DEFLATE text/javascript
+	AddOutputFilterByType DEFLATE text/plain
+	AddOutputFilterByType DEFLATE text/xml
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header set Access-Control-Allow-Origin *
+	Header set Access-Control-Allow-Credentials true
+	Header add Access-Control-Allow-Headers authorization,content-type
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/* "access plus 1 year"
+	ExpiresByType video/* "access plus 1 year"
+	ExpiresByType text/plain "access plus 1 month"
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType application/pdf "access plus 1 month"
+	ExpiresByType text/x-javascript "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+	ExpiresByType application/javascript "access plus 1 week"
+	ExpiresByType image/x-icon "access plus 1 year"
+	ExpiresDefault "access plus 2 days"
+</IfModule>
+
+<IfModule pagespeed_module>
+	ModPagespeed on
+	ModPagespeedRewriteLevel PassThrough
+	AddOutputFilterByType MOD_PAGESPEED_OUTPUT_FILTER text/html
+
+	ModPagespeedMaxCombinedJsBytes 10485760
+	ModPagespeedMaxCombinedCssBytes 10485760
+	ModPagespeedJsInlineMaxBytes 10485760
+	ModPagespeedCssInlineMaxBytes 10485760
+	ModPagespeedGoogleFontCssInlineMaxBytes 10485760
+	ModPagespeedCssFlattenMaxBytes 10485760
+
+	ModPagespeedEnableFilters combine_css
+	ModPagespeedEnableFilters combine_javascript
+	ModPagespeedEnableFilters move_css_above_scripts
+	ModPagespeedEnableFilters move_css_to_head
+	ModPagespeedEnableFilters flatten_css_imports
+	ModPagespeedEnableFilters extend_cache
+	ModPagespeedEnableFilters insert_dns_prefetch
+	ModPagespeedEnableFilters elide_attributes
+	ModPagespeedEnableFilters remove_comments
+	ModPagespeedEnableFilters remove_quotes
+	ModPagespeedEnableFilters trim_urls
+	ModPagespeedEnableFilters collapse_whitespace
 </IfModule>

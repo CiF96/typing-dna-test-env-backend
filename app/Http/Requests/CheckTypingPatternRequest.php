@@ -14,7 +14,7 @@ class CheckTypingPatternRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,10 +25,11 @@ class CheckTypingPatternRequest extends FormRequest
     public function rules()
     {
         return [
-            "user" => ['required'],
+            "user_id" => ['required'],
             "typing_pattern" => ['required'],
             "device_type" => ['required', Rule::in(['mobile', 'desktop'])],
-            "pattern_type" => ['required', Rule::in(['0', '1', '2'])]
+            "pattern_type" => ['required', Rule::in(['0', '1', '2'])],
+            "text_id" => ['required', 'string']
         ];
     }
 }

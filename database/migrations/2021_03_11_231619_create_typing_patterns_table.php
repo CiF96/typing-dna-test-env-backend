@@ -14,8 +14,8 @@ class CreateTypingPatternsTable extends Migration
     public function up()
     {
         Schema::create('typing_patterns', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->uuid("id")->primary();
+            $table->uuid('user_id');
             $table->enum('device_type', ['desktop', 'mobile']);
             $table->enum('pattern_type', ['0', '1', '2']);
             $table->timestamps();
