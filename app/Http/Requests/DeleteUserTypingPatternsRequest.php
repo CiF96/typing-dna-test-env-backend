@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class DeleteUserTypingPatternsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => ['required', "email", "max:50"],
-            "password" => ['required', "string", "min:6"],
+            "user_id" => ['required', 'string'],
+            "device" => ['required', Rule::in(['mobile', 'desktop', 'all'])],
         ];
     }
 }

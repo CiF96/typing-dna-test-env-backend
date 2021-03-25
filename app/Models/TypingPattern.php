@@ -11,7 +11,22 @@ class TypingPattern extends Model
     use HasFactory, UsesUuid;
 
     protected $fillable = [
-        'device_type', 'pattern_type', 'text_id'
+        'device_type',
+        'pattern_type',
+        'text_id',
+        'compared_samples',
+        'previous_samples',
+        'confidence',
+        'confidence_interval',
+        'score',
+        'net_score',
+        'result',
+        'success',
+        'message_code',
+        'position',
+        'enrolled_position',
+        'selected_position',
+        'custom_field'
     ];
 
     public function user()

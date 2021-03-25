@@ -22,5 +22,6 @@ Route::post("register", [ApiAuthController::class, "register"])->name("register"
 Route::get("me", [ApiAuthController::class, "me"])->name("me");
 
 //TYPING PATTERN ROUTES
-Route::post("get-typing-pattern-data", [ApiAuthController::class, "getTypingPatternData"])->name("get-typing-pattern-data");
+// Route::post("get-typing-pattern-data", [ApiAuthController::class, "getTypingPatternData"])->name("get-typing-pattern-data");
 Route::post("typing-pattern-data", [ApiAuthController::class, "getTypingPatternDataPremium"])->name("typing-pattern-data");
+Route::post("delete-user-typing-patterns", [ApiAuthController::class, "deleteUserTypingPatterns"])->name("delete-user-typing-patterns");

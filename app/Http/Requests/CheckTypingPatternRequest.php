@@ -29,7 +29,9 @@ class CheckTypingPatternRequest extends FormRequest
             "typing_pattern" => ['required'],
             "device_type" => ['required', Rule::in(['mobile', 'desktop'])],
             "pattern_type" => ['required', Rule::in(['0', '1', '2'])],
-            "text_id" => ['required', 'string']
+            "text_id" => ['required', 'string'],
+            "enrolled_position" => ['nullable', 'numeric'],
+            "selected_position" => ['nullable', 'numeric']
         ];
     }
 }
