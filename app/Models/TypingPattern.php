@@ -26,7 +26,10 @@ class TypingPattern extends Model
         'position',
         'enrolled_position',
         'selected_position',
-        'custom_field'
+        'custom_field',
+        'text_length',
+        'experiment_type',
+        'user_email'
     ];
 
     public function user()

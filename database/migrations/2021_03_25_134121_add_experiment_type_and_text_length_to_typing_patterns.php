@@ -14,8 +14,8 @@ class AddExperimentTypeAndTextLengthToTypingPatterns extends Migration
     public function up()
     {
         Schema::table('typing_patterns', function (Blueprint $table) {
-            $table->enum('text_length', ['short', 'medium', 'default', 'long', 'veryLong'])->nullable();
-            $table->enum('experiment_type', ['default', 'length', 'swipe'])->nullable();
+            $table->string('text_length')->nullable();
+            $table->string('experiment_type')->nullable();
         });
     }
 

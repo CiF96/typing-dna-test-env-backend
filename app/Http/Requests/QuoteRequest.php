@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteUserTypingPatternsRequest extends FormRequest
+class QuoteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,8 @@ class DeleteUserTypingPatternsRequest extends FormRequest
     public function rules()
     {
         return [
-            "user_id" => ['required', 'string'],
-            "device" => ['required', Rule::in(['mobile', 'desktop', 'all'])],
-            "pattern_type" => ['nullable', Rule::in(['0', '1', '2', 'all'])]
+            "min_length" => ['nullable', "numeric"],
+            "max_length" => ['nullable', "numeric"],
         ];
     }
 }
